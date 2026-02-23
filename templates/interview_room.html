@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Interview Session</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="interview-body">
+      <!-- Sidebar -->
+  <div class="sidebar">
+    <div class="logo">Prep AI</div>
+    <div class="menu-title">Main Menu</div>
+    <ul class="menu-items">
+      <li class="menu-item"><a href="{{ url_for('dashboard') }}" class="menu-link {% if page == 'dashboard' %}active{% endif %}">Dashboard</a></li>
+      <li class="menu-item"><a href="{{ url_for('interview') }}" class="menu-link {% if page == 'interview' %}active{% endif %}">Interview</a></li>
+      <li class="menu-item"><a href="{{ url_for('insight') }}" class="menu-link {% if page == 'insight' %}active{% endif %}">Insight</a></li>
+      <li class="menu-item"><a href="{{ url_for('talent') }}" class="menu-link {% if page == 'talent' %}active{% endif %}">Talent</a></li>
+      <li class="menu-item"><a href="{{ url_for('profile') }}" class="menu-link {% if page == 'profile' %}active{% endif %}">Profile</a></li>
+    </ul>
+    <button class="logout-btn">Log out</button>
+  </div>
+
+<div class="interview-container">
+
+  <h2 class="interview-title">AI Interviewer</h2>
+
+  <!-- Question Area -->
+  <div class="question-box" id="questionBox">
+    Tell me about yourself.
+  </div>
+
+  <!-- Text Answer -->
+  <textarea id="textAnswer" class="answer-input"
+    placeholder="Type your answer here..."></textarea>
+
+  <!-- Controls -->
+  <div class="interview-controls">
+    <button id="micBtn" class="control-btn">🎤 Speak</button>
+    <button id="sendBtn" class="control-btn primary">Send Answer</button>
+  </div>
+
+</div>
+
+<script src="{{ url_for('static', filename='interview_room.js') }}"></script>
+</body>
+</html>
