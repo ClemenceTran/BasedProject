@@ -1,0 +1,85 @@
+/* ==========================================================
+   Insight - Full Screen Clean Layout
+   ========================================================== */
+
+body.insight-page {
+  background: #ffffff;  /* full white background */
+  margin: 0;
+}
+
+/* Main area next to sidebar */
+body.insight-page .main-content {
+  margin-left: 280px;
+  width: calc(100% - 280px);
+  min-height: 100vh;
+
+  padding: 60px 60px 40px;
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  background: #ffffff;
+}
+
+/* Title */
+.insight-title {
+  font-size: 42px;
+  font-weight: 800;
+  margin-bottom: 40px;
+  color: #111;
+}
+
+/* Results list container (no shadow, no card look) */
+.results-list {
+  width: 100%;
+  max-width: 900px;
+
+  border: 1px solid #e9e9e9;
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+/* Each result row */
+.result-row {
+  display: block;
+  padding: 22px 26px;
+
+  text-decoration: none;
+  color: #111;
+  font-size: 18px;
+  font-weight: 600;
+
+  border-bottom: 1px solid #eeeeee;
+  background: #ffffff;
+
+  transition: background 0.15s ease;
+}
+
+.result-row:last-child {
+  border-bottom: none;
+}
+
+.result-row:hover {
+  background: #f7f7f7;
+}
+
+/* =============================
+   Responsive
+   ============================= */
+@media (max-width: 960px) {
+  body.insight-page .main-content {
+    margin-left: 0;
+    width: 100%;
+    padding: 40px 20px;
+  }
+
+  .insight-title {
+    font-size: 30px;
+  }
+
+  .results-list {
+    max-width: 100%;
+  }
+}
