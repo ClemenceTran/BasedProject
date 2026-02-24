@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, abort, render_template, request, redirect, url_for
 from werkzeug.utils import secure_filename
 import os
 
@@ -59,7 +59,36 @@ def dashboard():
 
 @app.route("/insight")
 def insight():
-    return render_template("index.html", page="insight")
+    # Fake results list (replace with DB later)
+    results = [
+        {"id": 1, "title": "Result 1"},
+        {"id": 2, "title": "Result 2"},
+        {"id": 3, "title": "Result 3"},
+        {"id": 4, "title": "Result 4"},
+        {"id": 5, "title": "Result 5"},
+        {"id": 6, "title": "Result 6"},
+        {"id": 7, "title": "Result 7"},
+        {"id": 8, "title": "Result 8"},
+        {"id": 9, "title": "Result 9"},
+        {"id": 10, "title": "Result 10"},
+    ]
+    return render_template("insight.html", results=results)
+
+
+@app.route("/insight/results/<int:result_id>")
+def insight_result_detail(result_id: int):
+    # Fake lookup (replace with DB later)
+    fake_db = {
+        1: {"title": "Result 1", "summary": "This is a detailed summary for Result 1."},
+        2: {"title": "Result 2", "summary": "This is a detailed summary for Result 2."},
+        3: {"title": "Result 3", "summary": "This is a detailed summary for Result 3."},
+    }
+
+    data = fake_db.get(result_id)
+    if not data:
+        abort(404)
+
+    return render_template("results.html", result_id=result_id, data=data)
 
 
 @app.route("/talent")
