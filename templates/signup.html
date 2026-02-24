@@ -3,21 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <title>Prep AI – Sign up</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='auth.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='signin.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='signup.css') }}">
 </head>
 
 <body class="auth-page auth-centered">
 
-  <!-- top logo -->
   <div class="auth-top">
     <div class="logo">Prep AI</div>
   </div>
 
-  <!-- centered card -->
   <div class="auth-center">
     <div class="auth-card-wide">
 
-      <!-- HEADER ROW -->
       <div class="auth-header-row">
         <a href="{{ url_for('signin') }}" class="auth-back">
           ←
@@ -25,7 +23,6 @@
 
         <h2>Create an account</h2>
 
-        <!-- spacer (keeps title perfectly centered) -->
         <div class="auth-header-spacer"></div>
       </div>
 
