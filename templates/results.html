@@ -1,11 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Results Details</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Prep AI - Result Detail</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='base.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='results.css') }}">
 </head>
-<body>
-    
+
+<body class="insight-page">
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <div class="logo">Prep AI</div>
+    <div class="menu-title">Main Menu</div>
+
+    <ul class="menu-items">
+      <li class="menu-item"><a class="menu-link" href="{{ url_for('dashboard') }}">Dashboard</a></li>
+      <li class="menu-item"><a class="menu-link" href="{{ url_for('interview') }}">Interview</a></li>
+      <li class="menu-item"><a class="menu-link active" href="{{ url_for('insight') }}">Insight</a></li>
+      <li class="menu-item"><a class="menu-link" href="{{ url_for('talent') }}">Talent</a></li>
+      <li class="menu-item"><a class="menu-link" href="{{ url_for('profile') }}">Profile</a></li>
+    </ul>
+
+    <a class="logout-btn" href="{{ url_for('logout') }}">Log out</a>
+  </div>
+
+  <!-- Main -->
+  <div class="main-content">
+    <div class="insight-card">
+      <div class="detail-header">
+        <a class="detail-back" href="{{ url_for('insight') }}">←</a>
+        <h1 class="insight-title">{{ data.title }}</h1>
+        <div></div>
+      </div>
+
+      <div class="detail-body">
+        <h2>Summary</h2>
+        <p>{{ data.summary }}</p>
+
+        <h2>More details</h2>
+        <p>
+          (Put your detailed feedback here: strengths, weaknesses, scores, suggestions, etc.)
+        </p>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
