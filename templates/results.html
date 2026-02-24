@@ -9,7 +9,7 @@
 </head>
 
 <body class="insight-page">
-  <!-- Sidebar -->
+  <!-- Sidebar (UNCHANGED) -->
   <div class="sidebar">
     <div class="logo">Prep AI</div>
     <div class="menu-title">Main Menu</div>
@@ -27,23 +27,224 @@
 
   <!-- Main -->
   <div class="main-content">
-    <div class="insight-card">
+    <div class="page-shell">
+
       <div class="detail-header">
         <a class="detail-back" href="{{ url_for('insight') }}">←</a>
-        <h1 class="insight-title">{{ data.title }}</h1>
+        <h1 class="insight-title">{{ data.get('title', 'Mock Interview') }}</h1>
         <div></div>
       </div>
 
-      <div class="detail-body">
-        <h2>Summary</h2>
-        <p>{{ data.summary }}</p>
+      {% set comm = data.get('communication', {}) %}
+      {% set soft = data.get('softskills', {}) %}
+      {% set cont = data.get('content', {}) %}
+      {% set questions = data.get('questions', []) %}
 
-        <h2>More details</h2>
-        <p>
-          (Put your detailed feedback here: strengths, weaknesses, scores, suggestions, etc.)
-        </p>
+      <div class="detail-body">
+
+        <!-- ================= SUMMARY ================= -->
+        <div class="result-section">
+          <h2>Summary</h2>
+          <p class="summary-text">{{ data.get('summary', 'No summary available yet.') }}</p>
+        </div>
+
+        <!-- ================= OVERALL SCORE ================= -->
+        <div class="result-section">
+          <h2>Overall Performance</h2>
+
+          <div class="score-container">
+            <div class="score-circle">
+              <div class="score-number">{{ data.get('overall_score', 82) }}</div>
+              <div class="score-label">/ 100</div>
+            </div>
+
+            <div class="score-info">
+              <p><strong>Level:</strong> {{ data.get('level', 'Strong') }}</p>
+              <p><strong>Interview Readiness:</strong> {{ data.get('readiness', '75%') }}</p>
+              <p class="score-compare">{{ data.get('compare', '+0% vs last attempt') }}</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- ================= COMMUNICATION ================= -->
+        <div class="result-section">
+          <h2>Communication</h2>
+
+          <div class="metric">
+            <div class="metric-row">
+              <span class="metric-name">Clarity</span>
+              <span class="metric-value">{{ comm.get('clarity', 80) }}%</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress" data-width="{{ comm.get('clarity', 80) }}"></div>
+            </div>
+          </div>
+
+          <div class="metric">
+            <div class="metric-row">
+              <span class="metric-name">Confidence</span>
+              <span class="metric-value">{{ comm.get('confidence', 70) }}%</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress" data-width="{{ comm.get('confidence', 70) }}"></div>
+            </div>
+          </div>
+
+          <div class="metric">
+            <div class="metric-row">
+              <span class="metric-name">Pace</span>
+              <span class="metric-value">{{ comm.get('pace', 65) }}%</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress" data-width="{{ comm.get('pace', 65) }}"></div>
+            </div>
+          </div>
+
+          <div class="ai-feedback">
+            <div class="ai-label">AI Feedback</div>
+            <p>{{ comm.get('feedback', 'No feedback available yet.') }}</p>
+          </div>
+        </div>
+
+        <!-- ================= SOFT SKILLS ================= -->
+        <div class="result-section">
+          <h2>Soft Skills</h2>
+
+          <div class="metric">
+            <div class="metric-row">
+              <span class="metric-name">Engagement</span>
+              <span class="metric-value">{{ soft.get('engagement', 75) }}%</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress" data-width="{{ soft.get('engagement', 75) }}"></div>
+            </div>
+          </div>
+
+          <div class="metric">
+            <div class="metric-row">
+              <span class="metric-name">Structure (STAR)</span>
+              <span class="metric-value">{{ soft.get('structure', 70) }}%</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress" data-width="{{ soft.get('structure', 70) }}"></div>
+            </div>
+          </div>
+
+          <div class="metric">
+            <div class="metric-row">
+              <span class="metric-name">Professionalism</span>
+              <span class="metric-value">{{ soft.get('professionalism', 85) }}%</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress" data-width="{{ soft.get('professionalism', 85) }}"></div>
+            </div>
+          </div>
+
+          <div class="ai-feedback">
+            <div class="ai-label">AI Feedback</div>
+            <p>{{ soft.get('feedback', 'No feedback available yet.') }}</p>
+          </div>
+        </div>
+
+        <!-- ================= CONTENT QUALITY ================= -->
+        <div class="result-section">
+          <h2>Content Quality</h2>
+
+          <div class="metric">
+            <div class="metric-row">
+              <span class="metric-name">Relevance</span>
+              <span class="metric-value">{{ cont.get('relevance', 85) }}%</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress" data-width="{{ cont.get('relevance', 85) }}"></div>
+            </div>
+          </div>
+
+          <div class="metric">
+            <div class="metric-row">
+              <span class="metric-name">Technical Depth</span>
+              <span class="metric-value">{{ cont.get('depth', 75) }}%</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress" data-width="{{ cont.get('depth', 75) }}"></div>
+            </div>
+          </div>
+
+          <div class="metric">
+            <div class="metric-row">
+              <span class="metric-name">Examples</span>
+              <span class="metric-value">{{ cont.get('examples', 70) }}%</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress" data-width="{{ cont.get('examples', 70) }}"></div>
+            </div>
+          </div>
+
+          <div class="ai-feedback">
+            <div class="ai-label">AI Feedback</div>
+            <p>{{ cont.get('feedback', 'No feedback available yet.') }}</p>
+          </div>
+        </div>
+
+        <!-- ================= DETAILED QUESTION FEEDBACK ================= -->
+        <div class="result-section">
+          <h2>Detailed Question Feedback</h2>
+          <p class="hint-text">Open each question to see strengths, weaknesses, and an improved suggested answer.</p>
+
+          {% if questions and questions|length > 0 %}
+            <div class="qa-list">
+              {% for q in questions %}
+                <details class="question-block">
+                  <summary class="question-summary">
+                    <span class="question-title">{{ q.get('title', 'Question') }}</span>
+                    <span class="question-score">{{ q.get('score', 0) }}/100</span>
+                  </summary>
+
+                  <div class="question-content">
+                    <div class="q-box">
+                      <div class="q-box-title">What you did well</div>
+                      <ul>
+                        {% for s in q.get('strengths', []) %}
+                          <li>{{ s }}</li>
+                        {% endfor %}
+                        {% if q.get('strengths', [])|length == 0 %}
+                          <li>No strengths provided yet.</li>
+                        {% endif %}
+                      </ul>
+                    </div>
+
+                    <div class="q-box">
+                      <div class="q-box-title">What to improve</div>
+                      <ul>
+                        {% for w in q.get('weaknesses', []) %}
+                          <li>{{ w }}</li>
+                        {% endfor %}
+                        {% if q.get('weaknesses', [])|length == 0 %}
+                          <li>No weaknesses provided yet.</li>
+                        {% endif %}
+                      </ul>
+                    </div>
+
+                    <div class="q-box">
+                      <div class="q-box-title">Suggested improved answer</div>
+                      <div class="suggested-answer">
+                        {{ q.get('suggested_answer', 'No suggested answer yet.') }}
+                      </div>
+                    </div>
+                  </div>
+                </details>
+              {% endfor %}
+            </div>
+          {% else %}
+            <div class="empty-state">No per-question feedback available yet.</div>
+          {% endif %}
+        </div>
+
       </div>
     </div>
   </div>
+
+    <script src="{{ url_for('static', filename='results.js') }}"></script>
+
 </body>
 </html>
