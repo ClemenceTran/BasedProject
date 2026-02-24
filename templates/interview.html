@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Prep AI - Interview</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <title>Interview</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='base.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='interview.css') }}">
 </head>
 <body>
 
@@ -24,12 +25,11 @@
     <a class="logout-btn" href="{{ url_for('logout') }}">Log out</a>
   </div>
 
-  <!-- Main content -->
   <div class="main-content">
 
     <div class="mode-wrap">
 
-      <!-- ============ STEP 1 ============ -->
+      <!--Select CV + Job Describe -->
       <section id="step1">
         <h2>Select your CV</h2>
 
@@ -58,10 +58,9 @@
         </div>
       </section>
 
-      <!-- ============ STEP 2 ============ -->
-      <!-- IMPORTANT: style="display:none;" ensures it's hidden even without .hidden css -->
+      <!-- Select Interview Mode -->
       <section id="step2" class="hidden" style="display:none;">
-        <h2>Select</h2>
+        <h2>Select Interview Mode</h2>
 
         <div class="mode-cards">
           <button type="button" class="mode-card" data-mode="hr" id="hrCard">
@@ -75,10 +74,10 @@
           </button>
         </div>
 
-        <p class="mode-focus" id="modeHint">Choose an interview type.</p>
+        <p class="mode-focus" id="modeHint">Choose an interview mode.</p>
 
-        <div class="center-btn" style="display:flex; gap:10px; justify-content:center;">
-          <button type="button" class="start-btn" id="backBtn" style="background:#333;">Back</button>
+        <div class="center-btn">
+          <button type="button" class="start-btn start-btn-secondary" id="backBtn">Back</button>
           <button type="button" class="start-btn" id="startBtn">Start</button>
         </div>
 
