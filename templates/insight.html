@@ -1,12 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>INSIGHT PAGE</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Insight</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='base.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='insight.css') }}">
 </head>
-<body>
-    
+
+<body class="insight-page">
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <div class="logo">Prep AI</div>
+    <div class="menu-title">Main Menu</div>
+
+    <ul class="menu-items">
+      <li class="menu-item"><a class="menu-link" href="{{ url_for('dashboard') }}">Dashboard</a></li>
+      <li class="menu-item"><a class="menu-link" href="{{ url_for('interview') }}">Interview</a></li>
+      <li class="menu-item"><a class="menu-link active" href="{{ url_for('insight') }}">Insight</a></li>
+      <li class="menu-item"><a class="menu-link" href="{{ url_for('talent') }}">Talent</a></li>
+      <li class="menu-item"><a class="menu-link" href="{{ url_for('profile') }}">Profile</a></li>
+    </ul>
+
+    <a class="logout-btn" href="{{ url_for('logout') }}">Log out</a>
+  </div>
+
+  <!-- Main -->
+  <div class="main-content">
+    <div class="insight-card">
+      <h1 class="insight-title">Results</h1>
+
+      <div class="results-list">
+        {% for r in results %}
+          <a class="result-row" href="{{ url_for('insight_result_detail', result_id=r.id) }}">
+            {{ r.title }}
+          </a>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
 </body>
 </html>
