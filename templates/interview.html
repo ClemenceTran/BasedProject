@@ -12,75 +12,82 @@
   <div class="sidebar">
     <div class="logo">Prep AI</div>
     <div class="menu-title">Main Menu</div>
+
     <ul class="menu-items">
-      <li class="menu-item"><a href="{{ url_for('dashboard') }}" class="menu-link {% if page == 'dashboard' %}active{% endif %}">Dashboard</a></li>
-      <li class="menu-item"><a href="{{ url_for('interview') }}" class="menu-link {% if page == 'interview' %}active{% endif %}">Interview</a></li>
-      <li class="menu-item"><a href="{{ url_for('insight') }}" class="menu-link {% if page == 'insight' %}active{% endif %}">Insight</a></li>
-      <li class="menu-item"><a href="{{ url_for('talent') }}" class="menu-link {% if page == 'talent' %}active{% endif %}">Talent</a></li>
-      <li class="menu-item"><a href="{{ url_for('profile') }}" class="menu-link {% if page == 'profile' %}active{% endif %}">Profile</a></li>
+      <li class="menu-item"><a class="menu-link" href="{{ url_for('dashboard') }}">Dashboard</a></li>
+      <li class="menu-item"><a class="menu-link active" href="{{ url_for('interview') }}">Interview</a></li>
+      <li class="menu-item"><a class="menu-link" href="{{ url_for('insight') }}">Insight</a></li>
+      <li class="menu-item"><a class="menu-link" href="{{ url_for('talent') }}">Talent</a></li>
+      <li class="menu-item"><a class="menu-link" href="{{ url_for('profile') }}">Profile</a></li>
     </ul>
-    <a href="{{ url_for('login') }}" class="logout-btn">Log out</a>
+
+    <a class="logout-btn" href="{{ url_for('logout') }}">Log out</a>
   </div>
 
-  <!-- Main Content -->
+  <!-- Main content -->
   <div class="main-content">
 
-    {% set current_step = step|default(1) %}
-    {% set current_type = interview_type|default('technical') %}
-
-    <!-- STEP 1: Select Mode -->
-    {% if current_step == 1 %}
     <div class="mode-wrap">
-      <h2>Select</h2>
-      <div class="mode-cards">
-        <button type="button" class="mode-card" data-type="hr">
-          <div class="mode-icon">👤</div>
-          <div class="mode-label">HR</div>
-        </button>
-        <button type="button" class="mode-card" data-type="technical">
-          <div class="mode-icon">💻</div>
-          <div class="mode-label">Technical</div>
-        </button>
-      </div>
-      <p id="modeFocus" class="mode-focus"></p>
 
-      <div class="center-btn">
-        <a id="goStep2" data-base="{{ url_for('interview') }}?step=2"
-           href="{{ url_for('interview') }}?step=2&type={{ current_type }}"
-           class="start-btn">
-           Start
-        </a>
-      </div>
-    </div>
-    {% endif %}
+      <!-- ============ STEP 1 ============ -->
+      <section id="step1">
+        <h2>Select your CV</h2>
 
-    <!-- STEP 2: CV Upload + Job Description -->
-    {% if current_step == 2 %}
-    <div class="mode-wrap">
-      <form action="{{ url_for('interview_start') }}" method="POST" enctype="multipart/form-data" class="interview-form">
-        <input type="hidden" name="interview_type" value="{{ current_type }}">
+        <div class="interview-form">
+          <input type="file" id="cvInput" accept=".pdf,.doc,.docx" style="display:none;">
 
-        <h3>Select your CV</h3>
-        <label for="cv" class="upload-box">
-          <div class="upload-plus">+</div>
-          <div class="upload-text">Click to upload</div>
-          <div id="cvName" class="file-name"></div>
-        </label>
-        <input id="cv" name="cv" type="file" accept=".pdf,.doc,.docx" required>
+          <div class="upload-box" id="uploadBox" role="button" tabindex="0">
+            <div class="upload-plus">+</div>
+            <div class="upload-text">Upload your CV</div>
+            <div class="file-name" id="fileName">No file selected</div>
+          </div>
 
-        <h3 style="margin-top:20px;">Job description</h3>
-        <textarea name="job_description" rows="6" placeholder="Paste the job description here..." class="job-textarea"></textarea>
+          <h3 style="margin-top:18px;">Job description</h3>
+          <textarea
+            id="jobDesc"
+            class="job-textarea"
+            rows="6"
+            placeholder="Write short job description..."
+          ></textarea>
 
-        <div class="start-btn-wrap">
-          <button type="submit" class="start-btn">Start Interview</button>
+          <div class="start-btn-wrap">
+            <button type="button" class="start-btn" id="nextBtn">Next</button>
+          </div>
+
+          <p id="error1" class="error-text"></p>
         </div>
-      </form>
-    </div>
-    {% endif %}
+      </section>
 
+      <!-- ============ STEP 2 ============ -->
+      <!-- IMPORTANT: style="display:none;" ensures it's hidden even without .hidden css -->
+      <section id="step2" class="hidden" style="display:none;">
+        <h2>Select</h2>
+
+        <div class="mode-cards">
+          <button type="button" class="mode-card" data-mode="hr" id="hrCard">
+            <div class="mode-icon">👤</div>
+            <div class="mode-label">HR</div>
+          </button>
+
+          <button type="button" class="mode-card" data-mode="technical" id="techCard">
+            <div class="mode-icon">💻</div>
+            <div class="mode-label">Technical</div>
+          </button>
+        </div>
+
+        <p class="mode-focus" id="modeHint">Choose an interview type.</p>
+
+        <div class="center-btn" style="display:flex; gap:10px; justify-content:center;">
+          <button type="button" class="start-btn" id="backBtn" style="background:#333;">Back</button>
+          <button type="button" class="start-btn" id="startBtn">Start</button>
+        </div>
+
+        <p id="error2" class="error-text"></p>
+      </section>
+
+    </div>
   </div>
 
-  <!-- External JS -->
   <script src="{{ url_for('static', filename='interview.js') }}"></script>
 </body>
 </html>
