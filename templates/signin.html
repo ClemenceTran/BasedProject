@@ -3,16 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <title>Prep AI - Sign in</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='auth.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='signin.css') }}">
 
 </head>
 <body>
-  <!-- LEFT SIDE: logo + centered image+tagline -->
+  <!-- logo + centered image+tagline -->
   <div style="flex: 1; display:flex; flex-direction:column; padding:40px 30px 60px 30px;">
-    <!-- logo at top -->
     <div class="logo">Prep AI</div>
 
-    <!-- wrapper to center image + text vertically in remaining space -->
     <div style="flex:1; display:flex; flex-direction:column; justify-content:center;">
       <div style="max-width:520px; margin-bottom:24px;">
         <img src="{{ url_for('static', filename='photo/pic1.jpeg') }}"
@@ -20,19 +18,16 @@
              style="width:100%; border-radius:16px; display:block;">
       </div>
 
-      <!-- UPDATED: same width as image + smaller font -->
       <p style="font-size:20px; font-weight:1000; max-width:500px; color:#111; line-height:1.25;">
         Transforms your interview practice with real-time AI guidance.
       </p>
     </div>
   </div>
 
-  <!-- RIGHT SIDE: sign in card -->
   <div style="flex:1; display:flex; align-items:center; justify-content:center; padding:60px;">
     <div style="background:#fff; padding:40px 48px; border-radius:24px;
                 box-shadow:0 2px 8px rgba(0,0,0,0.1); width:100%; max-width:420px;">
 
-      <!-- top header with welcome + sign up -->
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:24px;">
         <div>
           <p style="font-size:18px; margin:0 0 4px 0;">Welcome to <strong>Prep AI</strong></p>
