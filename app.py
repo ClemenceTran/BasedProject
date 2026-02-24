@@ -71,25 +71,79 @@ def insight():
         {"id": 8, "title": "Result 8"},
         {"id": 9, "title": "Result 9"},
         {"id": 10, "title": "Result 10"},
+        {"id": 11, "title": "Result 11"},
+        {"id": 12, "title": "Result 12"},
+        {"id": 13, "title": "Result 13"},
+        {"id": 14, "title": "Result 14"},
     ]
     return render_template("insight.html", results=results)
 
 
 @app.route("/insight/results/<int:result_id>")
-def insight_result_detail(result_id: int):
-    # Fake lookup (replace with DB later)
-    fake_db = {
-        1: {"title": "Result 1", "summary": "This is a detailed summary for Result 1."},
-        2: {"title": "Result 2", "summary": "This is a detailed summary for Result 2."},
-        3: {"title": "Result 3", "summary": "This is a detailed summary for Result 3."},
+def insight_result_detail(result_id):
+
+    # 🔥 Mock Data (Replace with DB later)
+    data = {
+        "title": "Mock Technical Interview",
+        "summary": "You performed strongly overall. Communication was clear, and your technical explanations were solid. Minor improvements needed in pacing and adding measurable impact.",
+
+        "overall_score": 82,
+        "level": "Strong",
+        "readiness": "75%",
+        "compare": "+6% vs last attempt",
+
+        "communication": {
+            "clarity": 80,
+            "confidence": 70,
+            "pace": 65,
+            "feedback": "You communicated clearly but spoke slightly fast during technical explanations. Try pausing after important points."
+        },
+
+        "softskills": {
+            "engagement": 75,
+            "structure": 70,
+            "professionalism": 85,
+            "feedback": "Your answers followed a logical structure. Consider adding stronger storytelling and measurable outcomes."
+        },
+
+        "content": {
+            "relevance": 85,
+            "depth": 75,
+            "examples": 70,
+            "feedback": "Your answers were relevant and technically sound. Add more real-world examples with metrics."
+        },
+
+        "questions": [
+            {
+                "title": "Tell me about yourself",
+                "score": 78,
+                "strengths": [
+                    "Clear structure",
+                    "Confident delivery",
+                    "Relevant experience mentioned"
+                ],
+                "weaknesses": [
+                    "Too generic introduction",
+                    "Missing measurable achievements"
+                ],
+                "suggested_answer": "I am a software engineer with 3 years of experience building scalable web applications. In my previous role, I improved system performance by 30% by optimizing database queries and introducing caching mechanisms."
+            },
+            {
+                "title": "Explain a challenging project",
+                "score": 85,
+                "strengths": [
+                    "Good technical explanation",
+                    "Clear problem description"
+                ],
+                "weaknesses": [
+                    "Did not quantify impact clearly"
+                ],
+                "suggested_answer": "One challenging project involved redesigning a legacy API system. I led a refactor that reduced response time by 40% and improved reliability during peak traffic."
+            }
+        ]
     }
 
-    data = fake_db.get(result_id)
-    if not data:
-        abort(404)
-
-    return render_template("results.html", result_id=result_id, data=data)
-
+    return render_template("results.html", data=data)
 
 @app.route("/talent")
 def talent():
