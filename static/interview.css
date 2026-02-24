@@ -1,0 +1,226 @@
+.main-content {
+    margin-left: 280px; 
+    width: calc(100% - 280px);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    box-sizing: border-box;
+}
+
+.mode-wrap h2,
+.mode-wrap h3 {
+    font-family: inherit;
+    font-size: 22px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.mode-wrap {
+    max-width: 700px;
+    width: 100%;
+    background: #fff;
+    padding: 40px;
+    border-radius: 18px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    text-align: center;
+}
+
+.mode-cards {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin: 30px 0 14px;
+}
+
+.mode-card {
+    width: 160px;
+    height: 140px;
+    border-radius: 14px;
+    border: 1px solid #ddd;
+    background: #fff;
+    color: #111;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.mode-card:hover {
+    background: #86848468;
+    color: #fff;
+    border-color: #333;
+}
+
+.mode-card.selected {
+    background: #111;
+    color: #fff;
+    border-color: #111;
+}
+
+.mode-icon {
+    font-size: 44px;
+    margin-top: 16px;
+    line-height: 1;
+}
+
+.mode-label {
+    margin-top: 10px;
+    font-weight: 700;
+}
+
+.mode-focus {
+    opacity: 0.65;
+    margin: 0 0 24px 0;
+    min-height: 22px;
+}
+
+.center-btn {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 10px;
+}
+
+/* CV upload + job description*/
+.interview-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.upload-box {
+    width: 100%;
+    max-width: 420px;
+    background: #f3f3f3;
+    border-radius: 14px;
+    padding: 26px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.upload-box:hover {
+    background: #eaeaea;
+}
+
+.upload-plus {
+    font-size: 42px;
+    font-weight: 700;
+}
+
+.upload-text {
+    font-size: 13px;
+    opacity: 0.7;
+}
+
+.file-name {
+    margin-top: 8px;
+    font-size: 13px;
+    opacity: 0.7;
+    word-break: break-word;
+}
+
+.job-textarea {
+    width: 100%;
+    max-width: 420px;
+    border-radius: 14px;
+    border: none;
+    background: #f3f3f3;
+    padding: 16px;
+    outline: none;
+    resize: none;
+    font-family: inherit;
+    margin-top: 5px;
+}
+
+.start-btn-wrap {
+    margin-top: 26px;
+    display: flex;
+    justify-content: center;
+}
+
+/* Next button */
+.start-btn {
+    display: inline-block;
+    width: 160px;
+    background-color: #111;
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    padding: 14px 0;
+    font-size: 16px;
+    font-weight: 500;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.start-btn:hover {
+    background-color: #333;
+    color: #fff;
+}
+
+.start-btn:active {
+    background-color: #555;
+    color: #fff;
+    transform: scale(0.98);
+}
+
+.interview-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.interview-container {
+    width: 100%;
+    max-width: 700px;
+    background: #fff;
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    text-align: center;
+}
+
+.question-box {
+    background: #f3f3f3;
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    font-size: 18px;
+}
+
+.answer-input {
+    width: 100%;
+    height: 120px;
+    border-radius: 12px;
+    border: none;
+    background: #f3f3f3;
+    padding: 15px;
+    resize: none;
+    font-size: 16px;
+}
+
+.interview-controls {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.control-btn {
+    padding: 12px 20px;
+    border-radius: 10px;
+    border: none;
+    background: #ddd;
+    cursor: pointer;
+}
+
+.control-btn.primary {
+    background: #111;
+    color: #fff;
+}
+
