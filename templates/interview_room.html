@@ -1,46 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Interview Session</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Prep AI - Interview Room</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
-<body class="interview-body">
-      <!-- Sidebar -->
+
+<body class="interview-room-page">
+
+  <!-- Sidebar (keep) -->
   <div class="sidebar">
     <div class="logo">Prep AI</div>
     <div class="menu-title">Main Menu</div>
+
     <ul class="menu-items">
-      <li class="menu-item"><a href="{{ url_for('dashboard') }}" class="menu-link {% if page == 'dashboard' %}active{% endif %}">Dashboard</a></li>
-      <li class="menu-item"><a href="{{ url_for('interview') }}" class="menu-link {% if page == 'interview' %}active{% endif %}">Interview</a></li>
-      <li class="menu-item"><a href="{{ url_for('insight') }}" class="menu-link {% if page == 'insight' %}active{% endif %}">Insight</a></li>
-      <li class="menu-item"><a href="{{ url_for('talent') }}" class="menu-link {% if page == 'talent' %}active{% endif %}">Talent</a></li>
-      <li class="menu-item"><a href="{{ url_for('profile') }}" class="menu-link {% if page == 'profile' %}active{% endif %}">Profile</a></li>
+      <li class="menu-item"><a class="menu-link" href="{{ url_for('dashboard') }}">Dashboard</a></li>
+      <li class="menu-item"><a class="menu-link active" href="{{ url_for('interview') }}">Interview</a></li>
+      <li class="menu-item"><a class="menu-link" href="{{ url_for('insight') }}">Insight</a></li>
+      <li class="menu-item"><a class="menu-link" href="{{ url_for('talent') }}">Talent</a></li>
+      <li class="menu-item"><a class="menu-link" href="{{ url_for('profile') }}">Profile</a></li>
     </ul>
-    <button class="logout-btn">Log out</button>
+
+    <a class="logout-btn" href="{{ url_for('logout') }}">Log out</a>
   </div>
 
-<div class="interview-container">
+  <!-- Main -->
+  <div class="main-content">
 
-  <h2 class="interview-title">AI Interviewer</h2>
+    <!-- Top row -->
+    <div class="ir-topbar">
+      <button type="button" class="ir-back" id="backTopBtn">← Back</button>
+      <div class="ir-top-title">
+        Interview Room <span class="ir-dot">—</span>
+        <span id="modeLine">Mode: —</span>
+      </div>
+    </div>
 
-  <!-- Question Area -->
-  <div class="question-box" id="questionBox">
-    Tell me about yourself.
+    <!-- Messages (no box) -->
+    <div id="chatBox" class="ir-chat"></div>
+
+    <!-- Input bar -->
+    <div class="ir-composer">
+      <input id="msgInput" class="ir-input" type="text" placeholder="Type your answer..." />
+      <button type="button" class="ir-send" id="sendBtn">Send</button>
+    </div>
+
+    <!-- Voice row -->
+    <div class="ir-voice">
+      <button type="button" class="ir-rec" id="recordBtn">🎙 Start Recording</button>
+      <button type="button" class="ir-stop" id="stopBtn" disabled>Stop</button>
+      <span id="recStatus" class="ir-mic">Mic: idle</span>
+    </div>
+
   </div>
 
-  <!-- Text Answer -->
-  <textarea id="textAnswer" class="answer-input"
-    placeholder="Type your answer here..."></textarea>
-
-  <!-- Controls -->
-  <div class="interview-controls">
-    <button id="micBtn" class="control-btn">🎤 Speak</button>
-    <button id="sendBtn" class="control-btn primary">Send Answer</button>
-  </div>
-
-</div>
-
-<script src="{{ url_for('static', filename='interview_room.js') }}"></script>
+  <script src="{{ url_for('static', filename='interview_room.js') }}"></script>
 </body>
 </html>
