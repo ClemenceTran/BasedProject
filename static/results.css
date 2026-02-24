@@ -1,0 +1,295 @@
+/* Results page (content only). Sidebar is not touched here. */
+
+.insight-page .main-content {
+  padding: 28px;
+  background: #fff;
+  min-height: 100vh;
+
+  /* IMPORTANT: fixes “everything stuck left” when base.css uses flex */
+  flex: 1;
+  width: 100%;
+  min-width: 0;
+}
+
+/* This is NOT a “big box” card — it’s only a layout shell */
+.page-shell {
+  width: 100%;
+  max-width: 1050px;
+  margin: 0 auto;
+}
+
+/* Header */
+.detail-header {
+  display: grid;
+  grid-template-columns: 44px 1fr 44px;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 18px;
+}
+
+.detail-back {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  font-size: 20px;
+  text-decoration: none;
+  color: #111;
+  transition: transform 0.15s ease;
+}
+
+.detail-back:hover {
+  transform: translateX(-2px);
+}
+
+.insight-title {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 800;
+  text-align: center;
+}
+
+/* Body */
+.detail-body {
+  display: grid;
+  gap: 18px;
+  width: 100%;
+}
+
+.result-section {
+  width: 100%;
+  background: #fff;
+  border: 1px solid rgba(0,0,0,0.07);
+  border-radius: 15px;
+  padding: 22px;
+  box-shadow: 0 8px 18px rgba(0,0,0,0.06);
+}
+
+.result-section h2 {
+  margin: 0 0 12px 0;
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.summary-text {
+  margin: 0;
+  color: #333;
+  line-height: 1.55;
+}
+
+/* Score */
+.score-container {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 16px;
+  align-items: center;
+}
+
+.score-circle {
+  width: 150px;
+  height: 150px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  border: 12px solid rgba(0,0,0,0.85);
+  background: #fff;
+}
+
+.score-number {
+  font-size: 42px;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.score-label {
+  margin-top: -6px;
+  font-size: 13px;
+  color: #666;
+  font-weight: 700;
+}
+
+.score-info p {
+  margin: 6px 0;
+  color: #222;
+}
+
+.score-compare {
+  color: #666;
+  font-size: 13px;
+}
+
+/* Metrics */
+.metric {
+  margin-top: 10px;
+}
+
+.metric-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 6px;
+}
+
+.metric-name {
+  font-weight: 750;
+  color: #222;
+}
+
+.metric-value {
+  font-size: 13px;
+  font-weight: 800;
+  color: #111;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 10px;
+  border-radius: 999px;
+  background: rgba(0,0,0,0.08);
+  overflow: hidden;
+}
+
+.progress {
+  height: 100%;
+  width: 0%;
+  border-radius: 999px;
+  background: rgba(0,0,0,0.82);
+}
+
+/* AI feedback */
+.ai-feedback {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px dashed rgba(0,0,0,0.18);
+}
+
+.ai-label {
+  font-size: 12px;
+  color: #666;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  font-weight: 800;
+  margin-bottom: 6px;
+}
+
+.ai-feedback p {
+  margin: 0;
+  color: #222;
+  line-height: 1.55;
+}
+
+/* Detailed Q/A */
+.hint-text {
+  margin: -6px 0 8px 0;
+  color: #666;
+  font-size: 13px;
+}
+
+.qa-list {
+  display: grid;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.question-block {
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 14px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.question-summary {
+  cursor: pointer;
+  padding: 14px;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  font-weight: 850;
+  list-style: none;
+}
+
+.question-block summary::-webkit-details-marker {
+  display: none;
+}
+
+.question-title {
+  color: #111;
+}
+
+.question-score {
+  font-size: 12px;
+  font-weight: 900;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(0,0,0,0.08);
+  color: #111;
+  white-space: nowrap;
+}
+
+.question-content {
+  padding: 0 14px 14px 14px;
+  display: grid;
+  gap: 10px;
+}
+
+.q-box {
+  background: rgba(0,0,0,0.04);
+  border-radius: 12px;
+  padding: 12px;
+}
+
+.q-box-title {
+  font-size: 12px;
+  font-weight: 900;
+  color: #666;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.q-box ul {
+  margin: 0;
+  padding-left: 18px;
+  color: #111;
+}
+
+.q-box li {
+  margin: 6px 0;
+  line-height: 1.4;
+}
+
+.suggested-answer {
+  background: rgba(255,255,255,0.7);
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius: 10px;
+  padding: 10px;
+  line-height: 1.55;
+  color: #111;
+}
+
+/* Empty state */
+.empty-state {
+  margin-top: 10px;
+  padding: 14px;
+  border-radius: 12px;
+  background: rgba(0,0,0,0.04);
+  color: #666;
+  font-size: 14px;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .insight-page .main-content {
+    padding: 18px;
+  }
+
+  .score-container {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+  }
+
+  .score-info {
+    text-align: center;
+  }
+}
