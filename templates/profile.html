@@ -1,12 +1,149 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Prep AI - Profile</title>
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='base.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='profile.css') }}">
 </head>
-<body>
-    <h1>PROFILE PAGE</h1>
+
+<body class="profile-page">
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <div class="logo">Prep AI</div>
+    <div class="menu-title">Main Menu</div>
+
+    <ul class="menu-items">
+      <li class="menu-item"><a class="menu-link" href="{{ url_for('interview') }}">Interview</a></li>
+      <li class="menu-item"><a class="menu-link" href="{{ url_for('insight') }}">Insight</a></li>
+      <li class="menu-item"><a class="menu-link" href="{{ url_for('talent') }}">Talent</a></li>
+      <li class="menu-item"><a class="menu-link active" href="{{ url_for('profile') }}">Profile</a></li>
+    </ul>
+
+    <a class="logout-btn" href="{{ url_for('logout') }}">Log out</a>
+  </div>
+
+  <!-- Main -->
+  <div class="main-content">
+    <div class="profile-wrap">
+
+      {% if message %}
+        <div class="profile-alert {{ 'ok' if status == 'ok' else 'err' }}">
+          {{ message }}
+        </div>
+      {% endif %}
+
+      <!-- Section header (Change password link is NOT on top page, it's inside the section) -->
+      <div class="profile-info-header">
+        <div class="profile-info-title">Account Information</div>
+
+        <div class="profile-actions">
+          <!-- Change password as link-style action -->
+          <button type="button" class="link-action" id="openPwModal">
+            Change Password <span class="icon-pencil">✎</span>
+          </button>
+
+          <!-- Edit info icon -->
+          <button type="button" class="mini-icon-btn" id="openInfoModal" aria-label="Edit account info">
+            <span class="icon-pencil">✎</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Info (no big box, just clean white background) -->
+      <div class="info-grid">
+        <div class="info-item">
+          <div class="info-label">Name</div>
+          <div class="info-value">{{ user.name }}</div>
+        </div>
+
+        <div class="info-item">
+          <div class="info-label">Surname</div>
+          <div class="info-value">{{ user.surname }}</div>
+        </div>
+
+        <div class="info-item">
+          <div class="info-label">Username</div>
+          <div class="info-value">{{ user.username }}</div>
+        </div>
+
+        <div class="info-item">
+          <div class="info-label">Email</div>
+          <div class="info-value">{{ user.email }}</div>
+        </div>
+
+        <div class="info-item">
+          <div class="info-label">Account Created</div>
+          <div class="info-value">{{ user.created_at }}</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- PASSWORD MODAL -->
+  <div class="modal-overlay" id="pwModalOverlay" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="pwTitle">
+      <div class="modal-top">
+        <h3 id="pwTitle" class="modal-title">Change Password</h3>
+        <button type="button" class="modal-x" id="closePwModal" aria-label="Close">✕</button>
+      </div>
+
+      <form method="POST" action="{{ url_for('change_password') }}" id="pwForm" class="modal-form">
+        <label class="field-label">Old password</label>
+        <div class="field-wrap">
+          <input class="field" type="password" name="current_password" id="currentPassword" required>
+          <button class="eye" type="button" data-eye="currentPassword">👁</button>
+        </div>
+
+        <label class="field-label">New password</label>
+        <div class="field-wrap">
+          <input class="field" type="password" name="new_password" id="newPassword" minlength="6" required>
+          <button class="eye" type="button" data-eye="newPassword">👁</button>
+        </div>
+
+        <label class="field-label">Confirm new password</label>
+        <div class="field-wrap">
+          <input class="field" type="password" name="confirm_password" id="confirmPassword" minlength="6" required>
+          <button class="eye" type="button" data-eye="confirmPassword">👁</button>
+        </div>
+
+        <p class="hint" id="pwHint">Minimum 6 characters.</p>
+
+        <div class="modal-actions">
+          <button type="button" class="btn btn-outline" id="cancelPwModal">Cancel</button>
+          <button type="submit" class="btn btn-primary">Update</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- EDIT INFO MODAL (Name/Surname) -->
+  <div class="modal-overlay" id="infoModalOverlay" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="infoTitle">
+      <div class="modal-top">
+        <h3 id="infoTitle" class="modal-title">Edit Account Information</h3>
+        <button type="button" class="modal-x" id="closeInfoModal" aria-label="Close">✕</button>
+      </div>
+
+      <form method="POST" action="{{ url_for('update_profile') }}" class="modal-form" id="infoForm">
+        <label class="field-label">Name</label>
+        <input class="field" type="text" name="name" value="{{ user.name }}" required>
+
+        <label class="field-label">Surname</label>
+        <input class="field" type="text" name="surname" value="{{ user.surname }}" required>
+
+        <div class="modal-actions">
+          <button type="button" class="btn btn-outline" id="cancelInfoModal">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="{{ url_for('static', filename='profile.js') }}"></script>
 </body>
 </html>
