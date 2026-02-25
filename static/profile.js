@@ -27,13 +27,47 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Eye toggle
+  // ---------- Eye toggle (SVG swap) ----------
+  const EYE_OFF_SVG = `
+    <svg class="eye-icon" xmlns="http://www.w3.org/2000/svg"
+         viewBox="0 0 24 24" fill="none"
+         stroke="currentColor" stroke-width="2"
+         stroke-linecap="round" stroke-linejoin="round">
+      <path d="M10.733 5.076a10.744 10.744 0 0 1 11.205 6.575 1 1 0 0 1 0 .696 10.747 10.747 0 0 1-1.444 2.49"/>
+      <path d="M14.084 14.158a3 3 0 0 1-4.242-4.242"/>
+      <path d="M17.479 17.499a10.75 10.75 0 0 1-15.417-5.151 1 1 0 0 1 0-.696 10.75 10.75 0 0 1 4.446-5.143"/>
+      <path d="m2 2 20 20"/>
+    </svg>
+  `;
+
+  const EYE_SVG = `
+    <svg class="eye-icon" xmlns="http://www.w3.org/2000/svg"
+         viewBox="0 0 24 24" fill="none"
+         stroke="currentColor" stroke-width="2"
+         stroke-linecap="round" stroke-linejoin="round">
+      <path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/>
+      <circle cx="12" cy="12" r="3"/>
+    </svg>
+  `;
+
+  // Ensure all eye buttons start with eye-off icon
+  document.querySelectorAll(".eye[data-eye]").forEach((btn) => {
+    if (!btn.querySelector("svg")) {
+      btn.innerHTML = EYE_OFF_SVG;
+    }
+  });
+
   document.querySelectorAll(".eye[data-eye]").forEach((btn) => {
     btn.addEventListener("click", () => {
       const id = btn.getAttribute("data-eye");
       const input = document.getElementById(id);
       if (!input) return;
-      input.type = input.type === "password" ? "text" : "password";
+
+      const willShow = input.type === "password";
+      input.type = willShow ? "text" : "password";
+
+      // Swap icon
+      btn.innerHTML = willShow ? EYE_SVG : EYE_OFF_SVG;
     });
   });
 
@@ -87,14 +121,11 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!infoOverlay) return;
 
     if (!force && recomputeDirty()) {
-      // for confirm
       const wantSave = window.confirm("You changed information. Do you want to save it?");
       if (wantSave) {
-        // submit form
         if (infoForm) infoForm.submit();
         return;
       } else {
-        // discard changes: reset to initial values
         if (infoForm) {
           Array.from(infoForm.elements).forEach((el) => {
             if (!el.name) return;
