@@ -16,98 +16,67 @@
     <div class="menu-title">Main Menu</div>
 
     <ul class="menu-items">
+      <li class="menu-item">
+        <a class="menu-link active" href="{{ url_for('interview') }}">
+          <svg class="sidebar-icon" xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M16 10a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 14.286V4a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
+            <path d="M20 9a2 2 0 0 1 2 2v10.286a.71.71 0 0 1-1.212.502l-2.202-2.202A2 2 0 0 0 17.172 19H10a2 2 0 0 1-2-2v-1"/>
+          </svg>
+          <span>Interview</span>
+        </a>
+      </li>
 
-        <!-- Interview -->
-        <li class="menu-item">
-            <a class="menu-link active" href="{{ url_for('interview') }}">
-            <svg class="sidebar-icon"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round">
-                <path d="M16 10a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 14.286V4a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
-                <path d="M20 9a2 2 0 0 1 2 2v10.286a.71.71 0 0 1-1.212.502l-2.202-2.202A2 2 0 0 0 17.172 19H10a2 2 0 0 1-2-2v-1"/>
-            </svg>
-            <span>Interview</span>
-            </a>
-        </li>
+      <li class="menu-item">
+        <a class="menu-link" href="{{ url_for('insight') }}">
+          <svg class="sidebar-icon" xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 3v16a2 2 0 0 0 2 2h16"/>
+            <path d="M7 11h8"/>
+            <path d="M7 16h12"/>
+            <path d="M7 6h3"/>
+          </svg>
+          <span>Insight</span>
+        </a>
+      </li>
 
-        <!-- Insight (ACTIVE) -->
-        <li class="menu-item">
-            <a class="menu-link" href="{{ url_for('insight') }}">
-            <svg class="sidebar-icon"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round">
-                <path d="M3 3v16a2 2 0 0 0 2 2h16"/>
-                <path d="M7 11h8"/>
-                <path d="M7 16h12"/>
-                <path d="M7 6h3"/>
-            </svg>
-            <span>Insight</span>
-            </a>
-        </li>
+      <li class="menu-item">
+        <a class="menu-link" href="{{ url_for('talent') }}">
+          <svg class="sidebar-icon" xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12c.552 0 1.005-.449.95-.998a10 10 0 0 0-8.953-8.951c-.55-.055-.998.398-.998.95v8a1 1 0 0 0 1 1z"/>
+            <path d="M21.21 15.89A10 10 0 1 1 8 2.83"/>
+          </svg>
+          <span>Talent</span>
+        </a>
+      </li>
 
-        <!-- Talent -->
-        <li class="menu-item">
-            <a class="menu-link" href="{{ url_for('talent') }}">
-            <svg class="sidebar-icon"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round">
-                <path d="M21 12c.552 0 1.005-.449.95-.998a10 10 0 0 0-8.953-8.951c-.55-.055-.998.398-.998.95v8a1 1 0 0 0 1 1z"/>
-                <path d="M21.21 15.89A10 10 0 1 1 8 2.83"/>
-            </svg>
-            <span>Talent</span>
-            </a>
-        </li>
-
-        <!-- Profile -->
-        <li class="menu-item">
-            <a class="menu-link" href="{{ url_for('profile') }}">
-            <svg class="sidebar-icon"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round">
-                <path d="M18 20a6 6 0 0 0-12 0"/>
-                <circle cx="12" cy="10" r="4"/>
-                <circle cx="12" cy="12" r="10"/>
-            </svg>
-            <span>Profile</span>
-            </a>
-        </li>
-
-        </ul>
+      <li class="menu-item">
+        <a class="menu-link" href="{{ url_for('profile') }}">
+          <svg class="sidebar-icon" xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 20a6 6 0 0 0-12 0"/>
+            <circle cx="12" cy="10" r="4"/>
+            <circle cx="12" cy="12" r="10"/>
+          </svg>
+          <span>Profile</span>
+        </a>
+      </li>
+    </ul>
 
     <a class="logout-btn" href="{{ url_for('logout') }}">
-        <svg class="sidebar-icon"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round">
-            <path d="m16 17 5-5-5-5"/>
-            <path d="M21 12H9"/>
-            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
-        </svg>
-        <span>Log out</span>
+      <svg class="sidebar-icon" xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m16 17 5-5-5-5"/>
+        <path d="M21 12H9"/>
+        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+      </svg>
+      <span>Log out</span>
     </a>
   </div>
 
@@ -123,20 +92,61 @@
       </div>
     </div>
 
-    <!-- Messages (no box) -->
+    <!-- Messages -->
     <div id="chatBox" class="ir-chat"></div>
 
-    <!-- Input bar -->
-    <div class="ir-composer">
-      <input id="msgInput" class="ir-input" type="text" placeholder="Type your answer..." />
-      <button type="button" class="ir-send" id="sendBtn">Send</button>
-    </div>
+    <!-- Composer (NEW UI, no +) -->
+    <div class="ir-composer2" id="composer">
 
-    <!-- Voice row -->
-    <div class="ir-voice">
-      <button type="button" class="ir-rec" id="recordBtn">🎙 Start Recording</button>
-      <button type="button" class="ir-stop" id="stopBtn" disabled>Stop</button>
-      <span id="recStatus" class="ir-mic">Mic: idle</span>
+      <!-- TEXT MODE -->
+      <div class="ir-textmode" id="textMode">
+        <input id="msgInput" class="ir-input2" type="text" placeholder="Ask anything" />
+
+        <button type="button" class="ir-iconbtn" id="micBtn" aria-label="Record">
+          <!-- mic icon -->
+          <svg class="ir-ic" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 19v3"/>
+            <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+            <rect x="9" y="2" width="6" height="13" rx="3"/>
+          </svg>
+        </button>
+
+        <button type="button" class="ir-sendbtn" id="sendBtn" disabled>
+          <svg class="ir-ic" xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round">
+            <path d="m5 12 7-7 7 7"/>
+            <path d="M12 19V5"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- RECORD MODE -->
+      <div class="ir-recordmode hidden" id="recordMode">
+        <div class="ir-wave" aria-hidden="true"></div>
+
+        <button type="button" class="ir-iconbtn" id="cancelRecBtn" aria-label="Cancel recording">
+          <!-- X icon -->
+          <svg class="ir-ic" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 6 6 18"/><path d="m6 6 12 12"/>
+          </svg>
+        </button>
+
+        <button type="button" class="ir-iconbtn" id="submitRecBtn" aria-label="Submit recording">
+          <!-- Check icon -->
+          <svg class="ir-ic" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 6 9 17l-5-5"/>
+          </svg>
+        </button>
+      </div>
+
     </div>
 
   </div>
