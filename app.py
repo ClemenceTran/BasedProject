@@ -1,6 +1,7 @@
 from flask import Flask, abort, render_template, request, redirect, url_for
 from werkzeug.utils import secure_filename
 import os
+import json
 
 app = Flask(__name__)
 
@@ -17,6 +18,70 @@ ALLOWED_EXTENSIONS = {"pdf", "doc", "docx"}
 
 def allowed_file(filename: str) -> bool:
     return "." in filename and filename.rsplit(".", 1)[1].lower() in ALLOWED_EXTENSIONS
+
+
+# ------------------- RESULTS STORAGE (for Talent averages) -------------------
+DATA_DIR = os.path.join(app.root_path, "data")
+os.makedirs(DATA_DIR, exist_ok=True)
+RESULTS_FILE = os.path.join(DATA_DIR, "results.json")
+
+SKILL_KEYS = [
+    ("soft_skills", "Soft Skills"),
+    ("communication", "Communication"),
+    ("answer_structure", "Answer Structure"),
+    ("technical", "Technical"),
+    ("content_relevance", "Content Relevant"),
+    ("problem_solving", "Problem - Solving"),
+]
+
+
+def load_results():
+    """
+    Expected structure (later):
+    [
+      {"id": 1, "title": "...", "scores": {"soft_skills": 70, ...}},
+      ...
+    ]
+    """
+    if not os.path.exists(RESULTS_FILE):
+        return []
+    try:
+        with open(RESULTS_FILE, "r", encoding="utf-8") as f:
+            return json.load(f) or []
+    except Exception:
+        return []
+
+
+def avg_skill_scores(results):
+    if not results:
+        return {k: 0 for k, _ in SKILL_KEYS}
+
+    sums = {k: 0.0 for k, _ in SKILL_KEYS}
+    counts = {k: 0 for k, _ in SKILL_KEYS}
+
+    for r in results:
+        scores = r.get("scores") or {}
+        for k, _ in SKILL_KEYS:
+            v = scores.get(k)
+            if isinstance(v, (int, float)):
+                sums[k] += float(v)
+                counts[k] += 1
+
+    avgs = {}
+    for k, _ in SKILL_KEYS:
+        avgs[k] = round(sums[k] / counts[k]) if counts[k] else 0
+        avgs[k] = max(0, min(100, avgs[k]))
+    return avgs
+
+
+def score_label(pct: int) -> str:
+    if pct >= 80:
+        return "Excellent!"
+    if pct >= 65:
+        return "Good!"
+    if pct >= 50:
+        return "Fair"
+    return "Needs work"
 
 
 # ------------------- AUTH ROUTES -------------------
@@ -81,8 +146,7 @@ def insight():
 
 @app.route("/insight/results/<int:result_id>")
 def insight_result_detail(result_id):
-
-    # 🔥 Mock Data (Replace with DB later)
+    # Mock Data (Replace with DB later)
     data = {
         "title": "Mock Technical Interview",
         "summary": "You performed strongly overall. Communication was clear, and your technical explanations were solid. Minor improvements needed in pacing and adding measurable impact.",
@@ -145,9 +209,24 @@ def insight_result_detail(result_id):
 
     return render_template("results.html", data=data)
 
+
 @app.route("/talent")
 def talent():
-    return render_template("index.html", page="talent")
+    # This now works because helpers exist
+    results = load_results()
+    avgs = avg_skill_scores(results)
+
+    cards = []
+    for key, title in SKILL_KEYS:
+        pct = int(avgs.get(key, 0))
+        cards.append({
+            "key": key,
+            "title": title,
+            "pct": pct,
+            "label": score_label(pct),
+        })
+
+    return render_template("talent.html", cards=cards, total_results=len(results))
 
 
 @app.route("/profile")
@@ -195,7 +274,6 @@ def interview_step2():
 
 @app.route("/interview-room")
 def interview_room():
-    # You can read mode in the template with: request.args.get("mode")
     return render_template("interview_room.html")
 
 
