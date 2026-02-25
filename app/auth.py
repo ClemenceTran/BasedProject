@@ -79,7 +79,7 @@ def signin():
             return render_template("signin.html", error="Wrong password.")
 
         session["user"] = user["username"]
-        return redirect(url_for("routes.interview"))
+        return redirect(url_for("interview.interview"))
 
     return render_template("signin.html")
 
