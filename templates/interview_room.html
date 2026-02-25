@@ -17,7 +17,7 @@
 
     <ul class="menu-items">
       <li class="menu-item">
-        <a class="menu-link active" href="{{ url_for('interview') }}">
+        <a class="menu-link active" href="{{ url_for('interview.interview') }}">
           <svg class="sidebar-icon" xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24" fill="none" stroke="currentColor"
               stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -29,7 +29,7 @@
       </li>
 
       <li class="menu-item">
-        <a class="menu-link" href="{{ url_for('insight') }}">
+        <a class="menu-link" href="{{ url_for('routes.insight') }}">
           <svg class="sidebar-icon" xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24" fill="none" stroke="currentColor"
               stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -43,7 +43,7 @@
       </li>
 
       <li class="menu-item">
-        <a class="menu-link" href="{{ url_for('talent') }}">
+        <a class="menu-link" href="{{ url_for('routes.talent') }}">
           <svg class="sidebar-icon" xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24" fill="none" stroke="currentColor"
               stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -55,7 +55,7 @@
       </li>
 
       <li class="menu-item">
-        <a class="menu-link" href="{{ url_for('profile') }}">
+        <a class="menu-link" href="{{ url_for('routes.profile') }}">
           <svg class="sidebar-icon" xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24" fill="none" stroke="currentColor"
               stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -68,7 +68,7 @@
       </li>
     </ul>
 
-    <a class="logout-btn" href="{{ url_for('logout') }}">
+    <a class="logout-btn" href="{{ url_for('auth.logout') }}">
       <svg class="sidebar-icon" xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24" fill="none" stroke="currentColor"
           stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -85,7 +85,7 @@
 
     <!-- Top row -->
     <div class="ir-topbar">
-      <a href="{{ url_for('interview') }}" class="ir-back">←</a>
+      <a href="{{ url_for('interview.interview') }}" class="ir-back">←</a>
       <div class="ir-top-title">
         Interview Room <span class="ir-dot">—</span>
         <span id="modeLine">Mode: —</span>
