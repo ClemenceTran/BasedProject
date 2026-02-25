@@ -224,4 +224,54 @@
     color: #fff;
 }
 
+/* =========================
+   Mobile fix: remove sidebar space
+   ========================= */
+@media (max-width: 900px) {
+  /* hide sidebar even if it's fixed */
+  .sidebar {
+    display: none !important;
+  }
+
+  /* IMPORTANT: remove the left gap created for the sidebar */
+  body,
+  body.interview-page,
+  body.interview-page .main-content,
+  .main-content {
+    margin-left: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 22px 16px !important;
+    box-sizing: border-box !important;
+  }
+
+  /* If base.css uses padding-left instead of margin-left */
+  body,
+  body.interview-page,
+  body.interview-page .main-content,
+  .main-content {
+    padding-left: 16px !important;
+  }
+
+  /* Stop desktop flex-centering from making it skinny */
+  .main-content {
+    display: block !important;
+    min-height: auto !important;
+  }
+
+  /* Make the card fill the screen nicely */
+  .mode-wrap {
+    width: 100% !important;
+    max-width: 520px !important;
+    margin: 0 auto !important;
+    padding: 22px 18px !important;
+  }
+
+  .upload-box,
+  .job-textarea {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+}
+
 
