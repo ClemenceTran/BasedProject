@@ -38,48 +38,51 @@
 
       <!-- Section header (Change password link is NOT on top page, it's inside the section) -->
       <div class="profile-info-header">
-        <div class="profile-info-title">Account Information</div>
-
-        <div class="profile-actions">
-          <!-- Change password as link-style action -->
-          <button type="button" class="link-action" id="openPwModal">
-            Change Password <span class="icon-pencil">✎</span>
-          </button>
+        <h1 class="profile-info-title">Account Information</h1>
 
           <!-- Edit info icon -->
-          <button type="button" class="mini-icon-btn" id="openInfoModal" aria-label="Edit account info">
-            <span class="icon-pencil">✎</span>
-          </button>
+          <button type="button" class="edit-btn" id="openEditModal">
+                Edit
+            </button>
         </div>
       </div>
 
       <!-- Info (no big box, just clean white background) -->
       <div class="info-grid">
         <div class="info-item">
-          <div class="info-label">Name</div>
-          <div class="info-value">{{ user.name }}</div>
+            <div class="info-label">Name</div>
+            <div class="info-value">{{ user.name }}</div>
         </div>
 
         <div class="info-item">
-          <div class="info-label">Surname</div>
-          <div class="info-value">{{ user.surname }}</div>
+            <div class="info-label">Surname</div>
+            <div class="info-value">{{ user.surname }}</div>
         </div>
 
         <div class="info-item">
-          <div class="info-label">Username</div>
-          <div class="info-value">{{ user.username }}</div>
+            <div class="info-label">Username</div>
+            <div class="info-value">{{ user.username }}</div>
         </div>
 
         <div class="info-item">
-          <div class="info-label">Email</div>
-          <div class="info-value">{{ user.email }}</div>
+            <div class="info-label">Email</div>
+            <div class="info-value">{{ user.email }}</div>
         </div>
 
         <div class="info-item">
-          <div class="info-label">Account Created</div>
-          <div class="info-value">{{ user.created_at }}</div>
+            <div class="info-label">Account Created</div>
+            <div class="info-value">{{ user.created_at }}</div>
         </div>
-      </div>
+
+        <!-- Password (same style as other items) -->
+        <div class="info-item">
+            <div class="info-label">Password</div>
+
+            <button type="button" class="pw-small-btn" id="openPwModal">
+            Change Password
+            </button>
+        </div>
+        </div>
 
     </div>
   </div>
