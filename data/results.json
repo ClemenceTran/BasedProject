@@ -1,0 +1,24 @@
+[
+  {
+    "id": "r1",
+    "scores": {
+      "soft_skills": 78,
+      "communication": 70,
+      "answer_structure": 66,
+      "technical": 72,
+      "content_relevance": 75,
+      "problem_solving": 68
+    }
+  },
+  {
+    "id": "r2",
+    "scores": {
+      "soft_skills": 82,
+      "communication": 74,
+      "answer_structure": 70,
+      "technical": 80,
+      "content_relevance": 77,
+      "problem_solving": 73
+    }
+  }
+]
