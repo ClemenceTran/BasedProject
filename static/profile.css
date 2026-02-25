@@ -212,19 +212,23 @@ body.profile-page .main-content {
 }
 
 .eye {
-  position: absolute;
-  right: 10px;
-  top: 50%;
-  transform: translateY(-50%);
-  border: none;
-  background: transparent;
-  cursor: pointer;
-  width: 38px;
-  height: 38px;
-  border-radius: 12px;
+  position:absolute;
+  right:12px;
+  top:50%;
+  transform:translateY(-50%);
+  border:none;
+  background:transparent;
+  cursor:pointer;
+  padding:4px;
 }
 
-.eye:hover {
+.eye-icon{
+  width:20px;
+  height:20px;
+  stroke:#888;
+}
+
+.eye:hover .eye-icon{
   background: #f3f3f3;
 }
 
