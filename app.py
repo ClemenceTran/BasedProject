@@ -115,13 +115,6 @@ def forgot_password():
         return redirect(url_for("signin"))
     return render_template("forgot_password.html")
 
-
-# ------------------- DASHBOARD & PAGES -------------------
-@app.route("/dashboard")
-def dashboard():
-    return render_template("index.html", page="dashboard")
-
-
 @app.route("/insight")
 def insight():
     # Fake results list (replace with DB later)
