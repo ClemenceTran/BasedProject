@@ -1,12 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TALENT</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Prep AI - Talent</title>
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='base.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='talent.css') }}">
 </head>
-<body>
-    
+
+<body class="talent-page">
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <div class="logo">Prep AI</div>
+    <div class="menu-title">Main Menu</div>
+
+    <ul class="menu-items">
+      <li class="menu-item"><a class="menu-link" href="{{ url_for('dashboard') }}">Dashboard</a></li>
+      <li class="menu-item"><a class="menu-link" href="{{ url_for('interview') }}">Interview</a></li>
+      <li class="menu-item"><a class="menu-link" href="{{ url_for('insight') }}">Insight</a></li>
+      <li class="menu-item"><a class="menu-link active" href="{{ url_for('talent') }}">Talent</a></li>
+      <li class="menu-item"><a class="menu-link" href="{{ url_for('profile') }}">Profile</a></li>
+    </ul>
+
+    <a class="logout-btn" href="{{ url_for('logout') }}">Log out</a>
+  </div>
+
+  <!-- Main -->
+  <div class="main-content">
+    <div class="talent-wrap">
+
+      <div class="talent-grid">
+        {% for c in cards %}
+          <div class="talent-card"
+               data-pct="{{ c.pct }}"
+               data-label="{{ c.label|e }}"
+               aria-label="{{ c.title }} score {{ c.pct }} percent">
+
+            <div class="talent-title">{{ c.title }}</div>
+
+            <!-- Donut -->
+            <div class="donut" style="--p: 0;">
+              <div class="donut-inner">
+                <div class="donut-number">0%</div>
+              </div>
+            </div>
+
+            <div class="talent-label">{{ c.label }}</div>
+          </div>
+        {% endfor %}
+      </div>
+
+    </div>
+  </div>
+
+  <script src="{{ url_for('static', filename='talent.js') }}"></script>
 </body>
 </html>
