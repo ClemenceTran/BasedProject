@@ -15,13 +15,98 @@
     <div class="menu-title">Main Menu</div>
 
     <ul class="menu-items">
-      <li class="menu-item"><a class="menu-link active" href="{{ url_for('interview') }}">Interview</a></li>
-      <li class="menu-item"><a class="menu-link" href="{{ url_for('insight') }}">Insight</a></li>
-      <li class="menu-item"><a class="menu-link" href="{{ url_for('talent') }}">Talent</a></li>
-      <li class="menu-item"><a class="menu-link" href="{{ url_for('profile') }}">Profile</a></li>
+      <li class="menu-item active">
+        <a href="{{ url_for('interview') }}"
+          class="menu-link active">
+          <!-- Interview icon -->
+          <svg class="sidebar-icon" xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M16 10a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 14.286V4a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
+            <path d="M20 9a2 2 0 0 1 2 2v10.286a.71.71 0 0 1-1.212.502l-2.202-2.202A2 2 0 0 0 17.172 19H10a2 2 0 0 1-2-2v-1"/>
+          </svg>
+          <span>Interview</span>
+        </a>
+      </li>
+      <li class="menu-item">
+        <a href="{{ url_for('insight') }}"
+          class="menu-link">
+
+          <!-- Insight Icon -->
+          <svg class="sidebar-icon"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round">
+            <path d="M3 3v16a2 2 0 0 0 2 2h16"/>
+            <path d="M7 11h8"/>
+            <path d="M7 16h12"/>
+            <path d="M7 6h3"/>
+          </svg>
+
+          <span>Insight</span>
+        </a>
+      </li>
+      <li class="menu-item">
+        <a href="{{ url_for('talent') }}"
+          class="menu-link">
+          <!-- Talent Icon -->
+          <svg class="sidebar-icon"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round">
+            <path d="M21 12c.552 0 1.005-.449.95-.998a10 10 0 0 0-8.953-8.951c-.55-.055-.998.398-.998.95v8a1 1 0 0 0 1 1z"/>
+            <path d="M21.21 15.89A10 10 0 1 1 8 2.83"/>
+          </svg>
+
+          <span>Talent</span>
+        </a>
+      </li>
+      <li class="menu-item">
+        <a href="{{ url_for('profile') }}"
+          class="menu-link">
+
+          <!-- Profile Icon -->
+          <svg class="sidebar-icon"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round">
+            <path d="M18 20a6 6 0 0 0-12 0"/>
+            <circle cx="12" cy="10" r="4"/>
+            <circle cx="12" cy="12" r="10"/>
+          </svg>
+
+          <span>Profile</span>
+        </a>
+      </li>    
     </ul>
 
-    <a class="logout-btn" href="{{ url_for('logout') }}">Log out</a>
+    <a class="logout-btn" href="{{ url_for('logout') }}">
+      <svg class="sidebar-icon"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round">
+        <path d="m16 17 5-5-5-5"/>
+        <path d="M21 12H9"/>
+        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+      </svg>
+      <span>Log out</span>
+    </a>
   </div>
 
   <div class="main-content">
