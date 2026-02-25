@@ -31,10 +31,10 @@ body {
 
 .auth-card-wide {
   width: 100%;
-  max-width: 560px;        
+  max-width: 480px;
   background: #ffffff;
-  border-radius: 28px;     
-  padding: 48px 48px 52px; 
+  border-radius: 28px;
+  padding: 44px 42px 48px;
   box-shadow: 0 25px 60px rgba(0, 0, 0, 0.12);
 }
 
@@ -42,11 +42,11 @@ body {
   display: grid;
   grid-template-columns: 40px 1fr 40px;
   align-items: center;
-  margin-bottom: 30px;
+  margin-bottom: 16px;
 }
 
 .auth-header-row h2 {
-  font-size: 34px;       
+  font-size: 28px;       
   font-weight: 800;
   text-align: center;
   margin: 0;
