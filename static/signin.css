@@ -81,6 +81,15 @@ form label {
   font-weight: 600;
 }
 
+.eye-icon {
+  stroke: #888;
+  transition: stroke 0.2s ease;
+}
+
+button[data-eye]:hover .eye-icon {
+  stroke: #111;
+}
+
 @media (min-width: 901px) {
   body > div {
     min-width: 0;
