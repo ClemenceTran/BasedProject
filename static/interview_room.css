@@ -75,85 +75,106 @@ body.interview-room-page .ir-composer-wrapper {
 }
 
 /* Composer row */
-body.interview-room-page .ir-composer {
-    width: min(880px, 92%);
-    margin: 0 auto;
-    display: flex;
-    gap: 10px;
-    align-items: center;
+body.interview-room-page .ir-composer2 {
+  width: min(880px, 92%);
+  margin: 0 auto;
+
+  display: flex;
+  align-items: center;
+
+  background: #fff;
+  border: 1px solid #e6e6e6;
+  border-radius: 999px;
+  padding: 10px 12px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.08);
 }
 
 /* Input */
-body.interview-room-page .ir-input {
-    flex: 1;
-    height: 56px;
-    border-radius: 16px;
-    border: 1px solid #e8e8e8;
-    background: #fff;
-    padding: 0 16px;
-    outline: none;
-    font-size: 16px;
+body.interview-room-page .ir-textmode {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
-/* Send */
-body.interview-room-page .ir-send {
-    height: 56px;
-    width: 120px;
-    border: none;
-    border-radius: 16px;
-    background: #111;
-    color: #fff;
-    font-size: 16px;
-    font-weight: 650;
-    cursor: pointer;
+body.interview-room-page .ir-input2 {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 20px;
+  padding: 12px 10px;
+  background: transparent;
+  color: #111;
 }
 
-body.interview-room-page .ir-send:hover {
-    background: #000;
+body.interview-room-page .ir-input2::placeholder {
+  color: #888;
 }
 
-/* Voice row */
-body.interview-room-page .ir-voice {
-    width: min(880px, 92%);
-    margin: 10px auto 0;
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
+body.interview-room-page .ir-iconbtn {
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
 }
 
-body.interview-room-page .ir-rec,
-body.interview-room-page .ir-stop {
-    height: 50px;
-    border: none;
-    border-radius: 14px;
-    padding: 0 18px;
-    font-size: 15px;
-    font-weight: 650;
-    cursor: pointer;
+body.interview-room-page .ir-iconbtn:hover {
+  background: #f2f2f2;
 }
 
-body.interview-room-page .ir-rec {
-    background: #111;
-    color: #fff;
-    min-width: 220px;
+body.interview-room-page .ir-ic {
+  width: 22px;
+  height: 22px;
+  stroke: #111;
 }
 
-body.interview-room-page .ir-stop {
-    background: #333;
-    color: #fff;
-    min-width: 120px;
+/* send button: grey until typing, then black */
+body.interview-room-page .ir-sendbtn {
+  width: 48px;
+  height: 48px;
+  border-radius: 999px;
+  border: none;
+  display: grid;
+  place-items: center;
+  background: #d1d1d1;
+  cursor: pointer;
+  transition: background 0.2s ease;
 }
 
-body.interview-room-page .ir-stop:disabled {
-    opacity: .5;
-    cursor: not-allowed;
+body.interview-room-page .ir-sendbtn:disabled {
+  cursor: default;
+  opacity: 0.95;
 }
 
-body.interview-room-page .ir-mic {
-    color: #777;
-    font-size: 13px;
+body.interview-room-page .ir-sendbtn:not(:disabled) {
+  background: #111;
+}
+
+body.interview-room-page .ir-sendbtn:not(:disabled) .ir-ic {
+  stroke: #fff;
+}
+
+/* record mode */
+.hidden { display: none !important; }
+
+body.interview-room-page .ir-recordmode {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+body.interview-room-page .ir-wave {
+  flex: 1;
+  height: 12px;
+  border-radius: 999px;
+  background:
+    radial-gradient(circle at 1px 6px, #111 2px, transparent 2.2px) 0 0/10px 12px repeat-x;
+  opacity: 0.55;
 }
 
 /* Messages */
