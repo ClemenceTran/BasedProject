@@ -45,10 +45,10 @@ body.interview-room-page .ir-top-title {
     text-align: center;
 
     font-size: 20px;
-    font-weight: 400; /* not bold */
+    font-weight: 400; 
     color: #444;
 
-    white-space: nowrap; /* keep one line */
+    white-space: nowrap; 
     overflow: hidden;
     text-overflow: ellipsis;
 }
@@ -58,7 +58,6 @@ body.interview-room-page .ir-dot {
     color: #aaa;
 }
 
-/* Chat scroll area (ONLY this scrolls) */
 body.interview-room-page #chatBox.ir-chat {
     width: min(880px, 92%);
     margin: 16px auto 0;
@@ -67,14 +66,12 @@ body.interview-room-page #chatBox.ir-chat {
     padding: 14px 6px 18px;
 }
 
-/* Sticky bottom area wrapper */
 body.interview-room-page .ir-composer-wrapper {
     background: #fff;
     border-top: 1px solid #eee;
     padding: 14px 0 18px;
 }
 
-/* Composer row */
 body.interview-room-page .ir-composer2 {
   width: min(880px, 92%);
   margin: 0 auto;
@@ -89,7 +86,6 @@ body.interview-room-page .ir-composer2 {
   box-shadow: 0 8px 30px rgba(0,0,0,0.08);
 }
 
-/* Input */
 body.interview-room-page .ir-textmode {
   width: 100%;
   display: flex;
@@ -101,7 +97,7 @@ body.interview-room-page .ir-input2 {
   flex: 1;
   border: none;
   outline: none;
-  font-size: 20px;
+  font-size: 18px;
   padding: 12px 10px;
   background: transparent;
   color: #111;
@@ -218,9 +214,6 @@ body.interview-room-page .ir-composer-wrapper {
     margin-bottom: 20px;   
 }
 
-/* =========================
-   Mobile fix: remove sidebar space
-   ========================= */
 @media (max-width: 900px) {
   /* hide sidebar even if it's fixed */
   .sidebar {
