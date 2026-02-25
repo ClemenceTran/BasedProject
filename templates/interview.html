@@ -16,7 +16,7 @@
 
     <ul class="menu-items">
       <li class="menu-item active">
-        <a href="{{ url_for('interview') }}"
+        <a href="{{ url_for('interview.interview') }}"
           class="menu-link active">
           <!-- Interview icon -->
           <svg class="sidebar-icon" xmlns="http://www.w3.org/2000/svg"
@@ -29,7 +29,7 @@
         </a>
       </li>
       <li class="menu-item">
-        <a href="{{ url_for('insight') }}"
+        <a href="{{ url_for('routes.insight') }}"
           class="menu-link">
 
           <!-- Insight Icon -->
@@ -51,7 +51,7 @@
         </a>
       </li>
       <li class="menu-item">
-        <a href="{{ url_for('talent') }}"
+        <a href="{{ url_for('routes.talent') }}"
           class="menu-link">
           <!-- Talent Icon -->
           <svg class="sidebar-icon"
@@ -70,7 +70,7 @@
         </a>
       </li>
       <li class="menu-item">
-        <a href="{{ url_for('profile') }}"
+        <a href="{{ url_for('routes.profile') }}"
           class="menu-link">
 
           <!-- Profile Icon -->
@@ -92,7 +92,7 @@
       </li>    
     </ul>
 
-    <a class="logout-btn" href="{{ url_for('logout') }}">
+    <a class="logout-btn" href="{{ url_for('auth.signup') }}">
       <svg class="sidebar-icon"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
