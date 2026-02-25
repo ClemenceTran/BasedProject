@@ -84,7 +84,7 @@ def score_label(pct: int) -> str:
     return "Needs work"
 
 
-# ------------------- AUTH ROUTES -------------------
+# SIGN IN + SIGN UP + FORGOT PASSWORD
 @app.route("/", methods=["GET", "POST"])
 @app.route("/signin", methods=["GET", "POST"])
 def signin():
@@ -92,7 +92,7 @@ def signin():
         username_or_email = request.form.get("username")
         password = request.form.get("password")
         # TODO: validate user
-        return redirect(url_for("dashboard"))
+        return redirect(url_for("interview"))
     return render_template("signin.html")
 
 
@@ -115,6 +115,7 @@ def forgot_password():
         return redirect(url_for("signin"))
     return render_template("forgot_password.html")
 
+# RESULTS
 @app.route("/insight")
 def insight():
     # Fake results list (replace with DB later)
@@ -136,7 +137,7 @@ def insight():
     ]
     return render_template("insight.html", results=results)
 
-
+#RESULT_DETAILS
 @app.route("/insight/results/<int:result_id>")
 def insight_result_detail(result_id):
     # Mock Data (Replace with DB later)
@@ -202,7 +203,7 @@ def insight_result_detail(result_id):
 
     return render_template("results.html", data=data)
 
-
+#EVALUATION_TALENT
 @app.route("/talent")
 def talent():
     # This now works because helpers exist
@@ -221,18 +222,12 @@ def talent():
 
     return render_template("talent.html", cards=cards, total_results=len(results))
 
-
-@app.route("/profile")
-def profile():
-    return render_template("index.html", page="profile")
-
-
-# ------------------- INTERVIEW FLOW -------------------
+# INTERVIEW
 @app.route("/interview", methods=["GET"])
 def interview():
     return render_template("interview.html", page="interview")
 
-
+#IMPORT CV + JOB DESCRIPTION
 @app.route("/interview/step1", methods=["POST"])
 def interview_step1():
     cv_file = request.files.get("cv")
@@ -253,7 +248,7 @@ def interview_step1():
 
     return {"ok": True, "cv_filename": filename}, 200
 
-
+#SELECT INTERVIEW MODE
 @app.route("/interview/step2", methods=["POST"])
 def interview_step2():
     interview_type = (request.form.get("interview_type") or "").strip().lower()
@@ -264,17 +259,66 @@ def interview_step2():
     # This becomes /interview-room?mode=hr or ?mode=technical
     return {"ok": True, "redirect": url_for("interview_room", mode=interview_type)}, 200
 
-
+#INTERVIEW_ROOM
 @app.route("/interview-room")
 def interview_room():
     return render_template("interview_room.html")
 
-
+#LOG OUT
 @app.route("/logout")
 def logout():
     return redirect(url_for("signin"))
 
+#PROFILE
+@app.route("/profile")
+def profile():
+    user = {
+        "name": "Clemence",
+        "surname": "Tran",
+        "username": "clemence",
+        "email": "clemence@example.com",
+        "created_at": "2026-02-20",
+    }
+    return render_template("profile.html", user=user)
 
-# ------------------- RUN APP -------------------
+@app.route("/profile/update", methods=["POST"])
+def update_profile():
+    name = (request.form.get("name") or "").strip()
+    surname = (request.form.get("surname") or "").strip()
+
+    # TODO: save to DB later
+    user = {
+        "name": name,
+        "surname": surname,
+        "username": "clemence",
+        "email": "clemence@example.com",
+        "created_at": "2026-02-20",
+    }
+
+    return render_template("profile.html", user=user, status="ok", message="Information updated.")
+
+#CHANGE PASSWORD
+@app.route("/change-password", methods=["POST"])
+def change_password():
+    current_password = request.form.get("current_password") or ""
+    new_password = request.form.get("new_password") or ""
+    confirm_password = request.form.get("confirm_password") or ""
+
+    user = {
+        "username": "clemence",
+        "email": "clemence@example.com",
+        "created_at": "2026-02-20",
+        "plan": "Free"
+    }
+
+    if new_password != confirm_password:
+        return render_template("profile.html", user=user, status="err", message="New passwords do not match.")
+
+    if len(new_password) < 6:
+        return render_template("profile.html", user=user, status="err", message="Password must be at least 6 characters.")
+
+    return render_template("profile.html", user=user, status="ok", message="Password updated successfully.")
+
+#RUN APP 
 if __name__ == "__main__":
     app.run(debug=True)
