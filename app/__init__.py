@@ -18,4 +18,8 @@ def create_app():
 
     from .auth import auth_bp
     app.register_blueprint(auth_bp)
+
+    from .interview import interview_bp
+    app.register_blueprint(interview_bp)
+    
     return app
