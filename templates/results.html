@@ -93,7 +93,7 @@
 
         </ul>
 
-    <a class="logout-btn" href="{{ url_for('routes.signin') }}">
+    <a class="logout-btn" href="{{ url_for('auth.signin') }}">
         <svg class="sidebar-icon"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
@@ -115,7 +115,7 @@
     <div class="page-shell">
 
       <div class="detail-header">
-        <a class="detail-back" href="{{ url_for('insight') }}">←</a>
+        <a class="detail-back" href="{{ url_for('routes.insight') }}">←</a>
         <h1 class="insight-title">{{ data.get('title', 'Mock Interview') }}</h1>
         <div></div>
       </div>
@@ -127,13 +127,12 @@
 
       <div class="detail-body">
 
-        <!-- ================= SUMMARY ================= -->
         <div class="result-section">
           <h2>Summary</h2>
           <p class="summary-text">{{ data.get('summary', 'No summary available yet.') }}</p>
         </div>
 
-        <!-- ================= OVERALL SCORE ================= -->
+        <!-- OVERALL SCORE -->
         <div class="result-section">
           <h2>Overall Performance</h2>
 
@@ -151,7 +150,7 @@
           </div>
         </div>
 
-        <!-- ================= COMMUNICATION ================= -->
+        <!-- COMMUNICATION -->
         <div class="result-section">
           <h2>Communication</h2>
 
@@ -191,7 +190,7 @@
           </div>
         </div>
 
-        <!-- ================= SOFT SKILLS ================= -->
+        <!-- SOFT SKILLS -->
         <div class="result-section">
           <h2>Soft Skills</h2>
 
@@ -231,7 +230,7 @@
           </div>
         </div>
 
-        <!-- ================= CONTENT QUALITY ================= -->
+        <!-- CONTENT QUALITY -->
         <div class="result-section">
           <h2>Content Quality</h2>
 
@@ -271,7 +270,7 @@
           </div>
         </div>
 
-        <!-- ================= DETAILED QUESTION FEEDBACK ================= -->
+        <!-- DETAILED QUESTION FEEDBACK -->
         <div class="result-section">
           <h2>Detailed Question Feedback</h2>
           <p class="hint-text">Open each question to see strengths, weaknesses, and an improved suggested answer.</p>
