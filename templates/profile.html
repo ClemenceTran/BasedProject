@@ -181,7 +181,7 @@
         <button type="button" class="modal-x" id="closePwModal" aria-label="Close">✕</button>
       </div>
 
-      <form method="POST" action="{{ url_for('change_password') }}" id="pwForm" class="modal-form">
+      <form method="POST" action="{{ url_for('routes.change_password') }}" id="pwForm" class="modal-form">
         <label class="field-label">Old password</label>
         <div class="field-wrap">
           <input class="field" type="password" name="current_password" id="currentPassword" required>
@@ -260,7 +260,7 @@
         <button type="button" class="modal-x" id="closeInfoModal" aria-label="Close">✕</button>
       </div>
 
-      <form method="POST" action="{{ url_for('update_profile') }}" class="modal-form" id="infoForm">
+      <form method="POST" action="{{ url_for('routes.update_profile') }}" class="modal-form" id="infoForm">
         <label class="field-label">Name</label>
         <input class="field" type="text" name="name" value="{{ user.name }}" required>
 
