@@ -117,7 +117,7 @@
 
       <div class="results-list">
         {% for r in results %}
-          <a class="result-row" href="{{ url_for('insight_result_detail', result_id=r.id) }}">
+          <a class="result-row" href="{{ url_for('routes.insight_result_detail', result_id=r.id) }}">
             {{ r.title }}
           </a>
         {% endfor %}
