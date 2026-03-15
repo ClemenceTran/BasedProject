@@ -1,0 +1,19 @@
+# Hassas dosyalar
+ca.pem
+.env
+
+# Data dosyaları
+data/users.json
+data/reset_tokens.json
+data/results.json
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Virtual environment
+venv/
+
+# OS
+.DS_Store
