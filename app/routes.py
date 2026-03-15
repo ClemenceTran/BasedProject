@@ -76,37 +76,47 @@ def score_label(pct: int) -> str:
 
 
 # ---------------- Profile ----------------
+#def get_current_user_record():
+#    """
+#    Returns the full user dict from users.json for the logged-in session user.
+#    """
+#    username = session.get("user")
+#    if not username:
+#        return None
+
+#    users = load_users()
+#    for u in users:
+#        if u.get("username") == username:
+#            return u
+#    return None
+
 def get_current_user_record():
-    """
-    Returns the full user dict from users.json for the logged-in session user.
-    """
     username = session.get("user")
     if not username:
         return None
 
-    users = load_users()
-    for u in users:
-        if u.get("username") == username:
-            return u
-    return None
-
+    from app.db import get_connection
+    conn = get_connection()
+    cursor = conn.cursor(dictionary=True)
+    cursor.execute("SELECT * FROM appuser WHERE LOWER(username) = %s", (username.lower(),))
+    user = cursor.fetchone()
+    cursor.close()
+    conn.close()
+    return user
 
 def build_profile_view_user(user_record):
-    """
-    Build the 'user' object profile.html expects.
-    Handles missing name/surname for accounts created before you added them.
-    """
-    created_at = (user_record.get("created_at") or "")[:10]
+    created_at = user_record.get("created_at")
+    if created_at:
+        created_at = str(created_at)[:10]
+    else:
+        created_at = ""
     return {
-        "name": user_record.get("name", ""),
-        "surname": user_record.get("surname", ""),
         "username": user_record.get("username", ""),
         "email": user_record.get("email", ""),
         "created_at": created_at,
         "plan": user_record.get("plan", "Free"),
     }
-
-
+    
 # ---------------- Home ----------------
 @routes_bp.route("/", endpoint="home")
 def home():

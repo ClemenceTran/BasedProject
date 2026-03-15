@@ -4,6 +4,7 @@ import uuid
 from datetime import datetime
 from flask import Blueprint, render_template, request, redirect, url_for, session
 from werkzeug.security import generate_password_hash, check_password_hash
+from app.db import get_connection
 
 auth_bp = Blueprint("auth", __name__)
 
@@ -30,13 +31,25 @@ def save_users(users):
         json.dump(users, f, indent=2)
 
 
+#def find_user(username_or_email):
+#    key = (username_or_email or "").strip().lower()
+#    for u in load_users():
+#        if u.get("username", "").lower() == key or u.get("email", "").lower() == key:
+#            return u
+#   return None
+
 def find_user(username_or_email):
     key = (username_or_email or "").strip().lower()
-    for u in load_users():
-        if u.get("username", "").lower() == key or u.get("email", "").lower() == key:
-            return u
-    return None
-
+    conn = get_connection()
+    cursor = conn.cursor(dictionary=True)
+    cursor.execute("""
+        SELECT * FROM appuser
+        WHERE LOWER(username) = %s OR LOWER(email) = %s
+    """, (key, key))
+    user = cursor.fetchone()
+    cursor.close()
+    conn.close()
+    return user
 
 def load_resets():
     if not os.path.exists(RESET_FILE):
@@ -101,16 +114,28 @@ def signup():
                 return render_template("signup.html", error="Username already exists.")
             if u["email"] == email:
                 return render_template("signup.html", error="Email already exists.")
+        
 
-        users.append({
-            "id": uuid.uuid4().hex,
-            "username": username,
-            "email": email,
-            "password_hash": generate_password_hash(password, method="pbkdf2:sha256"),
-            "created_at": datetime.utcnow().isoformat()
-        })
-
-        save_users(users)
+#        users.append({
+#            "id": uuid.uuid4().hex,
+#            "username": username,
+#            "email": email,
+#            "password_hash": generate_password_hash(password, method="pbkdf2:sha256"),
+#            "created_at": datetime.utcnow().isoformat()
+#        })
+#        save_users(users)
+        conn = get_connection()
+        cursor = conn.cursor()
+        cursor.execute("""
+            INSERT INTO appuser (username, email, password_hash, created_at)
+            VALUES (%s, %s, %s, %s)
+             """, (username,
+            email,
+            generate_password_hash(password, method="pbkdf2:sha256"),
+            datetime.utcnow())) 
+        conn.commit()
+        cursor.close()
+        conn.close()
         return redirect(url_for("auth.signin"))
 
     return render_template("signup.html")
