@@ -30,14 +30,7 @@ def save_users(users):
     with open(USERS_FILE, "w", encoding="utf-8") as f:
         json.dump(users, f, indent=2)
 
-
-#def find_user(username_or_email):
-#    key = (username_or_email or "").strip().lower()
-#    for u in load_users():
-#        if u.get("username", "").lower() == key or u.get("email", "").lower() == key:
-#            return u
-#   return None
-
+#gets the user from database 
 def find_user(username_or_email):
     key = (username_or_email or "").strip().lower()
     conn = get_connection()
@@ -65,13 +58,14 @@ def save_resets(items):
     with open(RESET_FILE, "w", encoding="utf-8") as f:
         json.dump(items, f, indent=2)
 
-
 def find_reset(token):
-    for r in load_resets():
-        if r.get("token") == token:
-            return r
-    return None
-
+    conn = get_connection()
+    cursor = conn.cursor(dictionary=True)
+    cursor.execute("SELECT * FROM reset_tokens WHERE token = %s", (token,))
+    reset = cursor.fetchone()
+    cursor.close()
+    conn.close()
+    return reset
 
 # ---------------- ROUTES ----------------
 
@@ -114,16 +108,6 @@ def signup():
                 return render_template("signup.html", error="Username already exists.")
             if u["email"] == email:
                 return render_template("signup.html", error="Email already exists.")
-        
-
-#        users.append({
-#            "id": uuid.uuid4().hex,
-#            "username": username,
-#            "email": email,
-#            "password_hash": generate_password_hash(password, method="pbkdf2:sha256"),
-#            "created_at": datetime.utcnow().isoformat()
-#        })
-#        save_users(users)
         conn = get_connection()
         cursor = conn.cursor()
         cursor.execute("""
@@ -147,7 +131,7 @@ def logout():
     return redirect(url_for("auth.signin"))
 
 
-# ✅ Forgot password: create token + show demo link
+# Forgot password: create token + show demo link
 @auth_bp.route("/forgot-password", methods=["GET", "POST"])
 def forgot_password():
     if request.method == "POST":
@@ -160,15 +144,15 @@ def forgot_password():
             user = find_user(email)
             if user:
                 token = uuid.uuid4().hex
-                resets = load_resets()
-                resets.append({
-                    "token": token,
-                    "username": user["username"],
-                    "created_at": datetime.utcnow().isoformat(),
-                    "used": False
-                })
-                save_resets(resets)
-
+                conn = get_connection()
+                cursor = conn.cursor()
+                cursor.execute("""
+                INSERT INTO reset_tokens (token, username, created_at, used)
+                VALUES (%s, %s, %s, %s)
+                """, (token, user["username"], datetime.utcnow(), False))
+                conn.commit()
+                cursor.close()
+                conn.close()
                 demo_link = url_for("auth.reset_password", token=token)
                 return render_template("forgot_password.html", success=msg, demo_link=demo_link)
 
@@ -194,21 +178,21 @@ def reset_password(token):
             return render_template("reset_password.html", error="Passwords do not match.", token=token)
 
         # update user password
-        users = load_users()
-        for u in users:
-            if u["username"] == reset["username"]:
-                u["password_hash"] = generate_password_hash(new_password, method="pbkdf2:sha256")
-                break
-        save_users(users)
-
+        conn = get_connection()
+        cursor = conn.cursor()
+        cursor.execute("""
+        UPDATE appuser SET password_hash = %s WHERE username = %s
+        """, (generate_password_hash(new_password, method="pbkdf2:sha256"), reset["username"]))
+        conn.commit()
+        cursor.close()
+        conn.close()
         # mark token used
-        resets = load_resets()
-        for r in resets:
-            if r.get("token") == token:
-                r["used"] = True
-                break
-        save_resets(resets)
-
+        conn = get_connection()
+        cursor = conn.cursor()
+        cursor.execute("UPDATE reset_tokens SET used = 1 WHERE token = %s", (token,))
+        conn.commit()
+        cursor.close()
+        conn.close()
         return redirect(url_for("auth.signin"))
 
     return render_template("reset_password.html", token=token)

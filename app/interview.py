@@ -69,7 +69,7 @@ def interview_step1():
 
     return jsonify(ok=True, cv_filename=filename), 200
 
-
+"""
 @interview_bp.route("/interview/step2", methods=["POST"])
 @login_required
 def interview_step2():
@@ -79,5 +79,41 @@ def interview_step2():
         return jsonify(ok=False, error="Please select HR or Technical."), 400
 
     session["interview_mode"] = interview_type
+
+    return jsonify(ok=True, redirect=url_for("interview.interview_room", mode=interview_type)), 200
+"""
+@interview_bp.route("/interview/step2", methods=["POST"])
+@login_required
+def interview_step2():
+    interview_type = (request.form.get("interview_type") or "").strip().lower()
+    if interview_type not in {"hr", "technical"}:
+        return jsonify(ok=False, error="Please select HR or Technical."), 400
+
+    session["interview_mode"] = interview_type
+
+    # post the interview info to db
+    from dotenv import load_dotenv
+    load_dotenv()
+    from app.db import get_connection
+    from .auth import find_user
+
+    username = session.get("user")
+    user = find_user(username)
+
+    if user:
+        conn = get_connection()
+        cursor = conn.cursor()
+        cursor.execute("""
+            INSERT INTO interview (user_id, type, job_description, resume_file)
+            VALUES (%s, %s, %s, %s)
+            """, (
+        user["id"],
+        interview_type.upper(),
+        session.get("job_description", ""),
+        session.get("cv_filename", "")))
+        conn.commit()
+        session["interview_id"] = cursor.lastrowid
+        cursor.close()
+        conn.close()
 
     return jsonify(ok=True, redirect=url_for("interview.interview_room", mode=interview_type)), 200

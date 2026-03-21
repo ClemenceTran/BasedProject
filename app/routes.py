@@ -76,19 +76,6 @@ def score_label(pct: int) -> str:
 
 
 # ---------------- Profile ----------------
-#def get_current_user_record():
-#    """
-#    Returns the full user dict from users.json for the logged-in session user.
-#    """
-#    username = session.get("user")
-#    if not username:
-#        return None
-
-#    users = load_users()
-#    for u in users:
-#        if u.get("username") == username:
-#            return u
-#    return None
 
 def get_current_user_record():
     username = session.get("user")
@@ -237,7 +224,6 @@ def update_profile():
     user = build_profile_view_user(user_record)
     return render_template("profile.html", user=user, status="ok", message="Information updated.")
 
-
 @routes_bp.route("/change-password", methods=["POST"], endpoint="change_password")
 @login_required
 def change_password():
@@ -246,23 +232,22 @@ def change_password():
     confirm_password = request.form.get("confirm_password") or ""
 
     username = session.get("user")
-    users = load_users()
 
-    user_record = None
-    for u in users:
-        if u.get("username") == username:
-            user_record = u
-            break
+    from app.db import get_connection
+    conn = get_connection()
+    cursor = conn.cursor(dictionary=True)
+    cursor.execute("SELECT * FROM appuser WHERE LOWER(username) = %s", (username.lower(),))
+    user_record = cursor.fetchone()
+    cursor.close()
+    conn.close()
 
     if not user_record:
         return redirect(url_for("auth.signin"))
 
-    # Verify old password
     if not check_password_hash(user_record.get("password_hash", ""), current_password):
         user = build_profile_view_user(user_record)
         return render_template("profile.html", user=user, status="err", message="Old password is incorrect.")
 
-    # Validate new password
     if len(new_password) < 6:
         user = build_profile_view_user(user_record)
         return render_template("profile.html", user=user, status="err", message="Password must be at least 6 characters.")
@@ -271,9 +256,14 @@ def change_password():
         user = build_profile_view_user(user_record)
         return render_template("profile.html", user=user, status="err", message="New passwords do not match.")
 
-    # Save new password hash
-    user_record["password_hash"] = generate_password_hash(new_password, method="pbkdf2:sha256")
-    save_users(users)
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute("""
+        UPDATE appuser SET password_hash = %s WHERE username = %s
+    """, (generate_password_hash(new_password, method="pbkdf2:sha256"), username))
+    conn.commit()
+    cursor.close()
+    conn.close()
 
     user = build_profile_view_user(user_record)
     return render_template("profile.html", user=user, status="ok", message="Password updated successfully.")
